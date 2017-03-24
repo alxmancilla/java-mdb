@@ -35,13 +35,15 @@ public class ExtractMetadataFromFileNames {
     File fileHandle = new File(imageLocation);
     GridFSInputFile gridFsInputFile = gridFs.createFile(fileHandle);
 
+    ImageFilenameAfore  ifa = new ImageFilenameAfore(imageLocation, '/', '.');
+
     //Set a name on GridFS entry
-    gridFsInputFile.setFilename(fileHandle.getName());
+    gridFsInputFile.setFilename(ifa.filename());
     gridFsInputFile.setContentType("image/jpg");
     DBObject obj = new BasicDBObject();
     
-    obj.put( "afore", new java.util.Date() );
-    obj.put( "proceso", new Integer(1));
+    obj.put( "afore", ifa.afore() );
+    obj.put( "proceso", ifa.proceso() );
     obj.put( "curp" , new Integer(1));
 
     gridFsInputFile.setMetaData(obj);
@@ -54,7 +56,7 @@ public class ExtractMetadataFromFileNames {
 
 
 
-public class ImageFilenamePensionISSSTE {
+class ImageFilenameAfore {
 
   /**
     5XX18AAAA999999NNNNNN99TiiCAAAAMMDD###.ZZZ
@@ -75,7 +77,7 @@ public class ImageFilenamePensionISSSTE {
     private char pathSeparator, 
                  extensionSeparator;
 
-    public Filename(String str, char sep, char ext) {
+    public ImageFilenameAfore(String str, char sep, char ext) {
         fullPath = str;
         pathSeparator = sep;
         extensionSeparator = ext;
@@ -100,15 +102,13 @@ public class ImageFilenamePensionISSSTE {
 
     public Integer afore() {
        //5XX - Clave de la Administradora Receptora según Catálogo de Entidades
-       return new Integer(fullPath.subtring(0, 3));
+       return new Integer(fullPath.substring(0, 3));
     }
 
     public Integer proceso() {
       // 18 - Proceso al que corresponde la imagen
-      return new Integer(fullPath.substring(2, 2);
+      return new Integer(fullPath.substring(2, 2));
     }
-
-
 
 
 }

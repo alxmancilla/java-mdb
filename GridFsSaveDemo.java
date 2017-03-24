@@ -14,12 +14,13 @@ import com.mongodb.gridfs.GridFSInputFile;
 public class GridFsSaveDemo {
 
   public static void main(String[] args) throws IOException {
-  /*
     MongoClient mongo = new MongoClient("localhost", 27017);
+    
+  /* 
     MongoClient mongo = new MongoClient(new MongoClientURI("mongodb://demo:demo00@mancilla.local:27000,mancilla.local:27001,mancilla.local:27002/?authSource=admin&replicaSet=localRS&connectTimeoutMS=30000&maxPoolSize=10&w=majority&readPreference=secondaryPreferred"));
-  */
 
     MongoClient mongo = new MongoClient(new MongoClientURI("mongodb://mancilla.local:27000,mancilla.local:27001,mancilla.local:27002/?replicaSet=rsDemo&maxPoolSize=10&w=majority&readPreference=secondaryPreferred"));
+  */
 
   DB db = mongo.getDB("digital");
 
